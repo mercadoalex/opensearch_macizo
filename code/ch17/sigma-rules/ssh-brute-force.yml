@@ -1,0 +1,16 @@
+title: SSH Brute Force Attempt
+status: stable
+description: Detecta múltiples intentos fallidos de login SSH en ventana de 5 minutos
+logsource:
+  product: linux
+  service: auth
+detection:
+  selection:
+    event.action: "authentication_failure"
+    process.name: "sshd"
+  condition: selection | count() > 5
+  timeframe: 5m
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1110

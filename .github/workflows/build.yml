@@ -1,0 +1,51 @@
+name: Build & Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo registry and build
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin
+          key: ${{ runner.os }}-cargo-mdbook-${{ hashFiles('book.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-mdbook-
+
+      - name: Install mdBook and plugins
+        run: |
+          cargo install mdbook mdbook-mermaid mdbook-pdf
+
+      - name: Build book
+        run: mdbook build
+
+      - name: Lint shell scripts
+        continue-on-error: true
+        run: |
+          find code/ -name "*.sh" -exec shellcheck {} +
+
+      - name: Lint Python files
+        continue-on-error: true
+        run: |
+          find code/ -name "*.py" -exec python -m py_compile {} +
+
+      - name: Lint YAML files
+        continue-on-error: true
+        run: |
+          pip install yamllint --quiet
+          find code/ -name "*.yml" -o -name "*.yaml" | xargs yamllint

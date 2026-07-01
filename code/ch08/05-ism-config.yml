@@ -1,0 +1,170 @@
+# Capítulo 8: Configuración de ISM como código
+# Este archivo define la policy y templates como configuración declarativa.
+# Útil para GitOps: versionas tu estrategia de indexación junto al código.
+#
+# Uso: procesar con el script deploy-config.sh para aplicar al clúster
+
+---
+# Configuración del cluster para ISM
+cluster_settings:
+  plugins.index_state_management.enabled: true
+  plugins.index_state_management.job_interval: 5
+  # Intervalo en minutos que ISM evalúa transiciones
+
+---
+# Component Templates
+component_templates:
+  - name: base-settings
+    template:
+      settings:
+        number_of_shards: 1
+        number_of_replicas: 1
+        refresh_interval: "5s"
+        index.codec: best_compression
+
+  - name: logs-mappings
+    template:
+      mappings:
+        properties:
+          "@timestamp":
+            type: date
+          message:
+            type: text
+            analyzer: standard
+          level:
+            type: keyword
+          service:
+            type: keyword
+          host:
+            type: keyword
+          trace_id:
+            type: keyword
+
+  - name: metrics-mappings
+    template:
+      mappings:
+        properties:
+          "@timestamp":
+            type: date
+          metric_name:
+            type: keyword
+          value:
+            type: double
+          unit:
+            type: keyword
+          host:
+            type: keyword
+          tags:
+            type: keyword
+
+---
+# Composable Index Templates
+index_templates:
+  - name: logs-template
+    index_patterns:
+      - "logs-*"
+    priority: 100
+    composed_of:
+      - base-settings
+      - logs-mappings
+    template:
+      settings:
+        number_of_replicas: 0
+      aliases:
+        logs-read: {}
+    _meta:
+      description: "Template para índices de logs con retención"
+      author: opensearch-macizo
+
+  - name: metrics-template
+    index_patterns:
+      - "metrics-*"
+    priority: 100
+    composed_of:
+      - base-settings
+      - metrics-mappings
+    template:
+      settings:
+        number_of_replicas: 0
+
+---
+# ISM Policies
+ism_policies:
+  - name: logs-lifecycle
+    policy:
+      description: "Ciclo de vida: hot → warm → delete"
+      default_state: hot
+      ism_template:
+        - index_patterns:
+            - "logs-*"
+          priority: 100
+      states:
+        - name: hot
+          actions:
+            - rollover:
+                min_size: "10gb"
+                min_doc_count: 5000000
+                min_index_age: "1d"
+          transitions:
+            - state_name: warm
+              conditions:
+                min_index_age: "2d"
+
+        - name: warm
+          actions:
+            - replica_count:
+                number_of_replicas: 0
+            - force_merge:
+                max_num_segments: 1
+          transitions:
+            - state_name: delete
+              conditions:
+                min_index_age: "30d"
+
+        - name: delete
+          actions:
+            - delete: {}
+          transitions: []
+
+  - name: metrics-lifecycle
+    policy:
+      description: "Ciclo de vida métricas: hot → cold → delete"
+      default_state: hot
+      ism_template:
+        - index_patterns:
+            - "metrics-*"
+          priority: 100
+      states:
+        - name: hot
+          actions:
+            - rollover:
+                min_size: "5gb"
+                min_index_age: "1d"
+          transitions:
+            - state_name: cold
+              conditions:
+                min_index_age: "7d"
+
+        - name: cold
+          actions:
+            - replica_count:
+                number_of_replicas: 0
+            - close: {}
+          transitions:
+            - state_name: delete
+              conditions:
+                min_index_age: "90d"
+
+        - name: delete
+          actions:
+            - delete: {}
+          transitions: []
+
+---
+# Rollover inicial
+rollover_setup:
+  - index: events-000001
+    aliases:
+      events-write:
+        is_write_index: true
+      events-read: {}

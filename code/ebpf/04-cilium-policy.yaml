@@ -1,0 +1,39 @@
+# CiliumNetworkPolicy para proteger un clúster OpenSearch en Kubernetes.
+# Permite:
+#   - Acceso al puerto 9200 (REST API) solo desde namespace "apps"
+#   - Comunicación inter-nodo (9300) solo entre pods OpenSearch
+#   - Todo otro tráfico bloqueado a nivel de kernel (eBPF)
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: opensearch-ingress
+  namespace: opensearch
+spec:
+  endpointSelector:
+    matchLabels:
+      app: opensearch
+  ingress:
+    # REST API: solo desde aplicaciones autorizadas
+    - fromEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: apps
+      toPorts:
+        - ports:
+            - port: "9200"
+              protocol: TCP
+    # Transport: solo entre nodos del clúster
+    - fromEndpoints:
+        - matchLabels:
+            app: opensearch
+      toPorts:
+        - ports:
+            - port: "9300"
+              protocol: TCP
+    # Dashboards: acceso desde namespace monitoring
+    - fromEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: monitoring
+      toPorts:
+        - ports:
+            - port: "5601"
+              protocol: TCP

@@ -1,0 +1,10 @@
+{"index": {"_index": "productos", "_id": "1"}}
+{"nombre": "Laptop ThinkPad X1 Carbon", "categoria": "laptops", "precio": 1299.99, "en_stock": true, "fecha_agregado": "2024-01-15"}
+{"index": {"_index": "productos", "_id": "2"}}
+{"nombre": "Monitor curvo 34 pulgadas", "categoria": "monitores", "precio": 549.00, "en_stock": true, "fecha_agregado": "2024-02-01"}
+{"index": {"_index": "productos", "_id": "3"}}
+{"nombre": "Mouse ergonómico inalámbrico", "categoria": "perifericos", "precio": 45.99, "en_stock": true, "fecha_agregado": "2024-01-20"}
+{"index": {"_index": "productos", "_id": "4"}}
+{"nombre": "SSD NVMe 2TB", "categoria": "almacenamiento", "precio": 189.50, "en_stock": false, "fecha_agregado": "2024-03-10"}
+{"index": {"_index": "productos", "_id": "5"}}
+{"nombre": "Docking station USB-C", "categoria": "perifericos", "precio": 79.99, "en_stock": true, "fecha_agregado": "2024-02-28"}

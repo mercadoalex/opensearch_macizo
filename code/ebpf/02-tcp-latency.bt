@@ -1,0 +1,22 @@
+#!/usr/bin/env bpftrace
+// 02-tcp-latency.bt — Histograma de latencia TCP para threads de OpenSearch.
+// Uso: sudo bpftrace code/ebpf/02-tcp-latency.bt
+// Requiere: bpftrace instalado, kernel 4.9+
+
+kprobe:tcp_sendmsg /comm == "java"/ {
+    @start[tid] = nsecs;
+}
+
+kretprobe:tcp_sendmsg /comm == "java" && @start[tid]/ {
+    $delta_us = (nsecs - @start[tid]) / 1000;
+    @latency_us = hist($delta_us);
+    @count_by_tid[tid] = count();
+    delete(@start[tid]);
+}
+
+interval:s:30 {
+    printf("\n--- TCP send latency histogram (last 30s) ---\n");
+    print(@latency_us);
+    clear(@latency_us);
+    clear(@count_by_tid);
+}

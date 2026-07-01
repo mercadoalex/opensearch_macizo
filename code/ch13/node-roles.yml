@@ -1,0 +1,27 @@
+# Ejemplo de configuración opensearch.yml para roles dedicados
+# Cada nodo usa un archivo diferente según su rol.
+
+# === Cluster Manager Node (cm-1, cm-2, cm-3) ===
+# node.name: cm-1
+# node.roles: [cluster_manager]
+# cluster.name: opensearch-prod
+# discovery.seed_hosts: ["cm-1", "cm-2", "cm-3"]
+# cluster.initial_cluster_manager_nodes: ["cm-1", "cm-2", "cm-3"]
+
+# === Data Node (data-1 ... data-N) ===
+# node.name: data-1
+# node.roles: [data]
+# cluster.name: opensearch-prod
+# discovery.seed_hosts: ["cm-1", "cm-2", "cm-3"]
+
+# === Coordinating-Only Node ===
+# node.name: coord-1
+# node.roles: []
+# cluster.name: opensearch-prod
+# discovery.seed_hosts: ["cm-1", "cm-2", "cm-3"]
+
+# === Ingest Node ===
+# node.name: ingest-1
+# node.roles: [ingest]
+# cluster.name: opensearch-prod
+# discovery.seed_hosts: ["cm-1", "cm-2", "cm-3"]

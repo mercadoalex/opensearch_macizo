@@ -1,0 +1,16 @@
+# Docker Compose override para agregar Data Prepper al laboratorio
+services:
+  data-prepper:
+    image: opensearchproject/data-prepper:2.6.1
+    container_name: data-prepper
+    volumes:
+      - ./data-prepper-config.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml
+    ports:
+      - "21890:21890"
+      - "21891:21891"
+      - "21892:21892"
+    depends_on:
+      opensearch-node1:
+        condition: service_healthy
+    networks:
+      - opensearch-net

@@ -1,0 +1,21 @@
+[book]
+title = "OpenSearch: Macizo y Conciso"
+authors = ["Alex Mercado"]
+language = "es"
+src = "src"
+
+[build]
+build-dir = "book"
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+
+[output.html]
+additional-css = ["theme/custom.css"]
+git-repository-url = "https://github.com/mercadoalex/opensearch_macizo"
+
+[output.html.fold]
+enable = true
+
+[output.pdf]
+command = "mdbook-pdf"

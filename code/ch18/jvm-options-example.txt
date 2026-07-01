@@ -1,0 +1,20 @@
+# JVM Options para OpenSearch en producción
+# Archivo: config/jvm.options
+
+# Heap: 50% de RAM, máximo 32 GB, siempre iguales
+-Xms16g
+-Xmx16g
+
+# GC: G1GC (default en OpenSearch 2.x)
+-XX:+UseG1GC
+-XX:G1HeapRegionSize=16m
+-XX:InitiatingHeapOccupancyPercent=40
+-XX:MaxGCPauseMillis=200
+
+# GC Logging (para diagnosticar pauses)
+-Xlog:gc*,gc+age=trace,safepoint:file=/var/log/opensearch/gc.log:utctime,pid,tags:filecount=32,filesize=64m
+
+# Error handling
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/var/log/opensearch/heapdump.hprof
+-XX:ErrorFile=/var/log/opensearch/hs_err_pid%p.log

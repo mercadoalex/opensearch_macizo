@@ -1,0 +1,9 @@
+# mdBook build output
+book/
+
+# TLS certificates (generated locally for lab)
+code/certs/*.pem
+code/certs/*.key
+
+# Environment variables
+.env

@@ -1,0 +1,52 @@
+# Data Prepper pipelines configuration for OpenSearch observability
+# Recibe datos OTEL y los almacena en OpenSearch
+
+log-pipeline:
+  source:
+    otel_logs_source:
+      port: 21892
+  processor:
+    - date:
+        from_time_received: true
+        destination: "@timestamp"
+  sink:
+    - opensearch:
+        hosts: ["https://opensearch-node1:9200"]
+        username: "admin"
+        password: "Admin123!"
+        insecure: true
+        index: "otel-logs-%{yyyy.MM.dd}"
+
+trace-pipeline:
+  source:
+    otel_trace_source:
+      port: 21890
+  processor:
+    - otel_trace_raw:
+    - otel_trace_group:
+        hosts: ["https://opensearch-node1:9200"]
+        username: "admin"
+        password: "Admin123!"
+        insecure: true
+  sink:
+    - opensearch:
+        hosts: ["https://opensearch-node1:9200"]
+        username: "admin"
+        password: "Admin123!"
+        insecure: true
+        index_type: "trace-analytics-raw"
+
+metrics-pipeline:
+  source:
+    otel_metrics_source:
+      port: 21891
+  processor:
+    - otel_metrics:
+        calculate_histogram_buckets: true
+  sink:
+    - opensearch:
+        hosts: ["https://opensearch-node1:9200"]
+        username: "admin"
+        password: "Admin123!"
+        insecure: true
+        index: "otel-metrics-%{yyyy.MM.dd}"

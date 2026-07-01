@@ -1,0 +1,33 @@
+/* theme/custom.css — Tema visual "OpenSearch: Macizo y Conciso" */
+
+:root {
+    --macizo-primary: #005EB8;
+    --macizo-accent: #FF9900;
+    --macizo-bg: #1a1a2e;
+    --macizo-text: #e0e0e0;
+}
+
+/* Tipografía densa y legible */
+.content {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    line-height: 1.6;
+    max-width: 48rem;
+}
+
+/* Callouts para opiniones del autor */
+blockquote.opinion {
+    border-left: 4px solid var(--macizo-accent);
+    background: rgba(255, 153, 0, 0.1);
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Referencia a código fuente */
+blockquote.code-ref {
+    border-left: 4px solid var(--macizo-primary);
+    font-size: 0.85em;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0 4px 4px 0;
+}
