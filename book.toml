@@ -16,6 +16,3 @@ git-repository-url = "https://github.com/mercadoalex/opensearch_macizo"
 
 [output.html.fold]
 enable = true
-
-[output.pdf]
-command = "mdbook-pdf"
