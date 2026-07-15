@@ -13,6 +13,12 @@ Implementar búsqueda vectorial con k-NN, registrar modelos de embedding, config
 
 ## Contenido
 
+### El Contexto de Mercado
+
+La búsqueda vectorial no es un experimento académico — es un mercado de $2.8 mil millones en 2026 con crecimiento proyectado de 41.9% CAGR hasta 2030 (451 Research, S&P Global). El 42% de las empresas ya usan o están evaluando bases de datos vectoriales. Las empresas data-driven adoptan al doble de velocidad que el resto (54% vs 26%).
+
+¿Por qué importa para OpenSearch? Porque OpenSearch combina búsqueda léxica (BM25), semántica (k-NN) e híbrida en un solo sistema — sin necesidad de operar un vector database separado. Eso es exactamente lo que el mercado demanda: una plataforma unificada que sirva como knowledge base para RAG, memoria para agentes, y cache semántica para reducir costos de LLMs.
+
 ### k-NN: Fundamentos
 
 k-Nearest Neighbors busca los K vectores más similares a un vector de consulta. OpenSearch soporta tres engines:
