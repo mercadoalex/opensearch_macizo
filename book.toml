@@ -1,6 +1,7 @@
 [book]
 title = "OpenSearch: Macizo y Conciso"
-authors = ["Alex Mercado"]
+description = "Clusters, queries y café — la referencia sin corbata"
+authors = ["Alejandro Mercado"]
 language = "es"
 src = "src"
 

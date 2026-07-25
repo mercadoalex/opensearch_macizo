@@ -7,3 +7,6 @@ code/certs/*.key
 
 # Environment variables
 .env
+
+# Kiro IDE
+.kiro/

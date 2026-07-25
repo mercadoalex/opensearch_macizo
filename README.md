@@ -1,5 +1,9 @@
 # OpenSearch: Macizo y Conciso
 
+**Clusters, queries y café — la referencia sin corbata**
+
+![Portada](portada03.png)
+
 Referencia técnica opinionada sobre OpenSearch — desde tus primeros índices hasta arquitecturas de producción.
 
 ## Estructura del Proyecto
