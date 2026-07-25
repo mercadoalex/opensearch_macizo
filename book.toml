@@ -8,10 +8,6 @@ src = "src"
 [build]
 build-dir = "book"
 
-[preprocessor.mermaid]
-command = "mdbook-mermaid"
-optional = true
-
 [output.html]
 additional-css = ["theme/custom.css"]
 git-repository-url = "https://github.com/mercadoalex/opensearch_macizo"
