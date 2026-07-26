@@ -4,7 +4,7 @@
 
 ![Alejandro Mercado](yomero.jpeg)
 
-Engineering Manager, desarrollador web y móvil con más de 15 años en la trinchera. Actualmente construye y opera infraestructura en AWS, lidera equipos DevOps, y escribe libros técnicos porque la documentación oficial nunca es suficiente.
+Engineering Manager, desarrollador web y móvil con más de 25 años en la trinchera. Actualmente construye y opera infraestructura en AWS, lidera equipos DevOps, y escribe libros técnicos porque la documentación oficial nunca es suficiente.
 
 ### En la comunidad
 
