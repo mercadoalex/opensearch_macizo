@@ -1,5 +1,7 @@
 # Prefacio
 
+![Portada — OpenSearch: Macizo y Conciso](portada03.png)
+
 ## De índices a clústeres: sin rodeos
 
 Este libro te lleva de cero a producción con OpenSearch. Sin relleno. Sin rodeos académicos. Código que funciona, explicaciones que van al punto.
