@@ -4,7 +4,7 @@
 
 ## De índices a clústeres: sin rodeos
 
-Este libro te lleva de cero a producción con OpenSearch. Sin relleno. Sin rodeos académicos. Código que funciona, explicaciones que van al punto.
+Este libro te lleva de cero a producción con OpenSearch. Sin relleno. Sin rodeos académicos. Código que funciona, explicaciones que van al punto. Cada capítulo incluye ejercicios prácticos diseñados para que aprendas haciendo — ya sea que estés estudiando por tu cuenta o dando clases. Si eres instructor buscando material didáctico que cubra ese vacío entre la documentación oficial y la realidad de operar un clúster, este libro es ese puente.
 
 OpenSearch es un motor de búsqueda y analítica distribuido. Nació como fork de Elasticsearch en 2021. Hoy es un proyecto independiente con licencia Apache 2.0 y un ecosistema en crecimiento activo.
 
