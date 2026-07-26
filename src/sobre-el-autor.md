@@ -13,6 +13,7 @@ Alejandro no solo consume tecnología — la comparte. Lleva más de una década
 - **HTML5 + JS México** — Community Leader desde 2010. Más de 3,500 miembros discutiendo JavaScript, frameworks y tecnologías web.
 - **El Taller DevOps** — Squad Leader desde 2015. CI/CD, Kubernetes, contenedores, observabilidad — casi 1,200 miembros.
 - **AWS Community Builder** — Reconocido por AWS como thought leader técnico.
+- **IBM Champion** — Con foco en HashiCorp e infraestructura como código.
 - **CD Ambassador (CNCF)** — Embajador de la Continuous Delivery Foundation.
 - **DevOps Institute Ambassador** — Parte del programa global de embajadores.
 
