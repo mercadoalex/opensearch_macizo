@@ -10,3 +10,7 @@ code/certs/*.key
 
 # Kiro IDE
 .kiro/
+
+# Draft covers
+portada01.png
+portada02.png
