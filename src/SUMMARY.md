@@ -1,6 +1,7 @@
 # Summary
 
 [Prefacio](prefacio.md)
+[Sobre el Autor](sobre-el-autor.md)
 [Mapa de Progresión](mapa-progresion.md)
 
 # Parte I — Novato
